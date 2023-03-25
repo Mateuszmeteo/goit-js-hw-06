@@ -22,9 +22,47 @@
 
 
 
+const divBox = document.querySelector('#boxes')
+
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
     .toString(16)
     .padStart(6, 0)}`;
 }
+
+
+function createBoxes(amount) {
+  const boxes = [];
+
+  for (let i = 0; i < amount; i++) {
+    const box = document.createElement('div');
+      box.style.width = 30 + i * 10 + 'px';
+      box.style.height = 30 + i * 10 + 'px';
+      // box.style.margin = 
+      box.style.background = getRandomHexColor();
+
+      // divBox.appendChild(box);
+
+      boxes.push(box);
+      divBox.append(...boxes);
+  }
+}
+
+
+const btnCreate = document.querySelector('[data-create]');
+const inputControls = document.querySelector('input');
+
+btnCreate.addEventListener('click', () => {
+  createBoxes(inputControls.value);
+})
+
+const btnDestroy = document.querySelector('[data-destroy]');
+
+btnDestroy.addEventListener('click', (e) => {
+  divBox.remove()
+  document.location.reload()
+})
+
+
+
